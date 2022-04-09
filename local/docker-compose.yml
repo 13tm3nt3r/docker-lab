@@ -11,7 +11,7 @@ services:
       - NET_ADMIN
     working_dir: /home/kali
     volumes:
-      - ../volumes/local_kali:/var/lib/docker/volumes
+      - ./../volumes/kali:/var/lib/docker/volumes
     networks:
       testing_net:
         ipv4_address: 172.19.0.3
@@ -24,7 +24,7 @@ services:
         MYSQL_USER: admin
         MYSQL_PASSWORD: admin
     volumes:
-      - ../volumes/local_muti_db_data:var/lib/mysql
+      - ./../volumes/muti_db_data:/var/lib/mysql
     networks:
       - testing_net
 
@@ -53,7 +53,7 @@ services:
   mysql:
     image: mysql:5
     volumes:
-      - ../volumes/local_db_data:/var/lib/mysql
+      - ./../volumes/db_data:/var/lib/mysql
     environment: 
       - MYSQL_ROOT_PASSWORD=root
     networks:
@@ -65,7 +65,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ../volumes/local_wordpress_data:/var/www/html
+      - ./../volumes/wordpress_data:/var/www/html
     environment: 
       - WORDPRESS_DB_HOST=mysql:3306
       - WORDPRESS_DB_USER=root
@@ -85,17 +85,17 @@ services:
       - NET_ADMIN
     working_dir: /root
     volumes:
-      - ../volumes/local_meta/:/var/lib/docker/volumes
+      - ./../volumes/meta/:/var/lib/docker/volumes
     networks:
       testing_net:
         ipv4_address: 172.19.1.8
 
 volumes:
-  local_kali: {}
-  local_muti_db_data: {}
-  local_db_data: {}
-  local_wordpress_data: {}
-  local_meta: {}
+  kali: {}
+  muti_db_data: {}
+  db_data: {}
+  wordpress_data: {}
+  meta: {}
 
 networks:
   testing_net:
