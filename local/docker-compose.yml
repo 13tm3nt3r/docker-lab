@@ -3,15 +3,21 @@ version: '3'
 services:
 
   kali:
-    image: estopl/kali:kali
+    image: estopl/kali:latest
     tty: true
     ports:
-      - "7655:22"
+      - "22:22"
     cap_add:
       - NET_ADMIN
     working_dir: /home/kali
     volumes:
       - ./../volumes/kali:/var/lib/docker/volumes
+      - ~/.ssh/id_rsa.pub:/pubkey:ro
+    environment:
+        PUBLIC_KEY_FILE: pubkey
+        USER_NAME: kali
+        PASSWORD_ACCESS: "false"
+    restart: always
     networks:
       testing_net:
         ipv4_address: 172.19.0.3
@@ -50,16 +56,6 @@ services:
       testing_net:
         ipv4_address: 172.19.1.5
 
-  mysql:
-    image: mysql:5
-    volumes:
-      - ./../volumes/db_data:/var/lib/mysql
-    environment: 
-      - MYSQL_ROOT_PASSWORD=root
-    networks:
-      testing_net:
-        ipv4_address: 172.19.1.7
-
   wordpress:
     image: estopl/wordpress:laura
     depends_on:
@@ -76,6 +72,16 @@ services:
     networks:
       testing_net:
         ipv4_address: 172.19.1.6
+
+  mysql:
+    image: mysql:5
+    volumes:
+      - ./../volumes/db_data:/var/lib/mysql
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      testing_net:
+        ipv4_address: 172.19.1.7
 
   metasploitable2:
     tty: true
