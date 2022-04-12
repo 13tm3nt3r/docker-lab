@@ -1,0 +1,106 @@
+version: '3'
+
+services:
+
+  kali:
+    image: estopl/kali:ssh
+    tty: true
+    ports:
+      - "2222:22"
+    cap_add:
+      - NET_ADMIN
+    command: bash -c "service ssh start && tail -f /dev/null"
+    working_dir: /home/kali
+    volumes:
+      - ./../volumes/kali:/home/kali
+    networks:
+      testing_net:
+        ipv4_address: 10.110.9.3
+
+  mutillidae_db:
+    image: mysql:5.5
+    environment:
+        MYSQL_ROOT_PASSWORD: mutillidae
+        MYSQL_DATABASE: mutillidae
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: admin
+    volumes:
+      - ./../volumes/muti_db_data:/var/lib/mysql
+    networks:
+      - testing_net
+
+  mutillidae_web:
+    image: crhystamils/mutillidae
+    links:
+        - mutillidae_db
+    depends_on:
+        - mutillidae_db
+    networks:
+      testing_net:
+        ipv4_address: 10.110.10.3
+
+  web_dvwa:
+    image: vulnerables/web-dvwa
+    networks:
+      testing_net:
+        ipv4_address: 10.110.10.4
+
+  juice_shop:
+    image: bkimminich/juice-shop
+    networks:
+      testing_net:
+        ipv4_address: 10.110.10.5
+
+  wordpress:
+    image: estopl/wordpress:laura
+    depends_on:
+      - mysql
+    volumes:
+      - ./../volumes/wordpress_data:/var/www/html
+    environment: 
+      - WORDPRESS_DB_HOST=mysql:3306
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=root
+      - WORDPRESS_DB_NAME=wordpress
+    ports:
+      - "8080:80"
+    networks:
+      testing_net:
+        ipv4_address: 10.110.10.6
+
+  mysql:
+    image: mysql:5
+    volumes:
+      - ./../volumes/db_data:/var/lib/mysql
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      testing_net:
+        ipv4_address: 10.110.10.7
+
+  metasploitable2:
+    tty: true
+    image: estopl/metasploitable2-testing:latest
+    # command: tail -f /dev/null
+    cap_add:
+      - NET_ADMIN
+    working_dir: /root
+    volumes:
+      - ./../volumes/meta/:/var/lib/docker/volumes
+    networks:
+      testing_net:
+        ipv4_address: 10.110.10.8
+
+volumes:
+  kali: {}
+  muti_db_data: {}
+  db_data: {}
+  wordpress_data: {}
+  meta: {}
+
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.110.0.0/20
