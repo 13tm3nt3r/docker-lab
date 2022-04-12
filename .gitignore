@@ -1,3 +1,4 @@
 # Untracked files and folders
-**/*.pem
+ib*
+*.pem
 
