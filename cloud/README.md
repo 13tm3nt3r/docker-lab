@@ -3,7 +3,16 @@ This docker-compose is used on the Digital Ocean droplet with **IP: 178.128.253.
 <br>
 
 ## How to use
-The process to access to this server is the following:
+The process to access to this server is the following:<br><br>
+**NEW**
+1. Download the OpenVPN file.
+2. Execute the OpenVPN file:<br>
+`openvpn base-client.ovpn`
+3. Connecto to any machine below using the provided IP.
+
+<br>
+
+**OLD**
 1. Connect via SSH to the user-droplet:<br>
 `ssh user@178.128.253.70`<br>
 _password:_ `c0nTraseniaUser`
