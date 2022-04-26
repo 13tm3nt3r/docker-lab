@@ -15,7 +15,7 @@ services:
       - ./volumes/kali:/home/kali
     networks:
       testing_net:
-        ipv4_address: 172.19.0.8
+        ipv4_address: 172.19.0.3
 
   mutillidae_db:
     image: mysql:5.5
@@ -27,8 +27,7 @@ services:
     volumes:
       - ./volumes/muti_db_data:/var/lib/mysql
     networks:
-      testing_net:
-        ipv4_address: 172.19.1.10
+      - testing_net
 
   mutillidae_web:
     image: crhystamils/mutillidae
@@ -52,10 +51,6 @@ services:
 
   web_dvwa:
     image: vulnerables/web-dvwa
-    links:
-        - dvwa_db
-    depends_on:
-        - dvwa_db
     networks:
       testing_net:
         ipv4_address: 172.19.1.4
@@ -66,10 +61,10 @@ services:
       testing_net:
         ipv4_address: 172.19.1.5
 
-  wordpress_db:
+  mysql:
     image: mysql:5
     volumes:
-      - ./volumes/wordpress_db:/var/lib/mysql
+      - ./volumes/db_data:/var/lib/mysql
     environment: 
       - MYSQL_ROOT_PASSWORD=root
     networks:
@@ -78,10 +73,8 @@ services:
 
   wordpress:
     image: estopl/wordpress:laura
-    links:
-        - wordpress_db
     depends_on:
-        - wordpress_db
+      - mysql
     volumes:
       - ./volumes/wordpress_data:/var/www/html
     environment: 
