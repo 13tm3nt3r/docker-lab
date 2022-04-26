@@ -101,13 +101,6 @@ services:
       testing_net:
         ipv4_address: 172.19.1.8
 
-volumes:
-  kali:
-  muti_db_data:
-  db_data:
-  wordpress_data:
-  meta:
-
 networks:
   testing_net:
     ipam:
