@@ -12,7 +12,7 @@ services:
     command: bash -c "service ssh start && tail -f /dev/null"
     working_dir: /home/kali
     volumes:
-      - ./../volumes/kali:/home/kali
+      - ./volumes/kali:/home/kali
     networks:
       testing_net:
         ipv4_address: 172.19.0.3
@@ -25,7 +25,7 @@ services:
         MYSQL_USER: admin
         MYSQL_PASSWORD: admin
     volumes:
-      - ./../volumes/muti_db_data:/var/lib/mysql
+      - ./volumes/muti_db_data:/var/lib/mysql
     networks:
       - testing_net
 
@@ -56,7 +56,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ./../volumes/wordpress_data:/var/www/html
+      - ./volumes/wordpress_data:/var/www/html
     environment: 
       - WORDPRESS_DB_HOST=mysql:3306
       - WORDPRESS_DB_USER=root
@@ -71,7 +71,7 @@ services:
   mysql:
     image: mysql:5
     volumes:
-      - ./../volumes/db_data:/var/lib/mysql
+      - ./volumes/db_data:/var/lib/mysql
     environment: 
       - MYSQL_ROOT_PASSWORD=root
     networks:
@@ -86,17 +86,17 @@ services:
       - NET_ADMIN
     working_dir: /root
     volumes:
-      - ./../volumes/meta/:/var/lib/docker/volumes
+      - ./volumes/meta/:/var/lib/docker/volumes
     networks:
       testing_net:
         ipv4_address: 172.19.1.8
 
 volumes:
-  kali: {}
-  muti_db_data: {}
-  db_data: {}
-  wordpress_data: {}
-  meta: {}
+  kali:
+  muti_db_data:
+  db_data:
+  wordpress_data:
+  meta:
 
 networks:
   testing_net:

@@ -7,7 +7,7 @@ The process to access to this server is the following:<br><br>
 **NEW**
 1. Download the OpenVPN file.
 2. Execute the OpenVPN file:<br>
-`openvpn base-client.ovpn`
+`openvpn tfg-client.ovpn`
 3. Connecto to any machine below using the provided IP.
 
 <br>
