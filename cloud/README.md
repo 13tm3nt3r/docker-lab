@@ -3,24 +3,12 @@ This docker-compose is used on the Digital Ocean droplet with **IP: 178.128.253.
 <br>
 
 ## How to use
-The process to access to this server is the following:<br><br>
-**NEW**
+The process to access to this server is the following:
 1. Download the OpenVPN file.
 2. Execute the OpenVPN file:<br>
-`openvpn tfg-client.ovpn`
-3. Connecto to any machine below using the provided IP.
+`sudo openvpn tfg-user.ovpn`
+3. Connecto to any machine below using the provided IPs.
 
-<br>
-
-**OLD**
-1. Connect via SSH to the user-droplet:<br>
-`ssh user@178.128.253.70`<br>
-_password:_ `c0nTraseniaUser`
-2. Access to each machine using the IPs below.
-3. In case you want to use the Kali machine as your pentester localhost, connect via SSH following the same procedure as before:<br>
-`ssh kali@172.19.0.3`<br>
-_password:_ `kali`
-4. Now you can perform any action you want to the rest of machines in your Kali.
 <br>
 
 ## Machines
