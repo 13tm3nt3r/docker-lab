@@ -78,6 +78,7 @@ services:
     image: estopl/wordpress:laura
     depends_on:
       - mysql
+    tty: true
     volumes:
       - ./volumes/wordpress_data:/var/www/html
     environment: 
