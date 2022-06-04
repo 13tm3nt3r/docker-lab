@@ -66,7 +66,10 @@ services:
     volumes:
       - ./volumes/db_data:/var/lib/mysql
     environment: 
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
     networks:
       testing_net:
         ipv4_address: 172.19.1.7
@@ -75,12 +78,13 @@ services:
     image: estopl/wordpress:laura
     depends_on:
       - mysql
+    tty: true
     volumes:
       - ./volumes/wordpress_data:/var/www/html
     environment: 
-      - WORDPRESS_DB_HOST=mysql:3306
-      - WORDPRESS_DB_USER=root
-      - WORDPRESS_DB_PASSWORD=root
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
       - WORDPRESS_DB_NAME=wordpress
     ports:
       - "8080:80"
