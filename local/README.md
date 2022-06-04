@@ -9,7 +9,7 @@ This docker-compose allows you to have a pentesting base laboratory to practice 
 3. Now you have all the required folders. Follow the next steps to start all the containers:<br>
 `cd docker-lab/`<br>
 `cd local/`<br>
-`docker-compose up -d`<br>
+`docker-compose up`<br>
 4. Practice your pententer skills with each machine started.
 5. To stop the structure of machines:<br>
 `docker-compose down`
