@@ -1,5 +1,5 @@
 # Cloud docker-lab
-This docker-compose is used on the Digital Ocean droplet with **IP: 178.128.253.70** to practice in a pentesting base laboratory.
+This docker-compose is used on a Digital Ocean server/droplet to practice in a pentesting base laboratory.
 <br>
 
 ## How to use
