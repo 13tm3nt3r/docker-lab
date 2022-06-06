@@ -1,15 +1,20 @@
 # Cloud docker-lab
-This docker-compose is used on a Digital Ocean server/droplet to practice in a pentesting base laboratory.
-<br>
+This is to create a docker laboratory with vulnerable containers in the cloud.<br>
+The cloud structure has to be similar to the one represented at the final of this file.<br>
 
 ## How to use
-The process to access to this server is the following:
-1. Download the OpenVPN file.
-2. Execute the OpenVPN file:<br>
-`sudo openvpn tfg-user.ovpn`
-3. Connecto to any machine below using the provided IPs.
-
-<br>
+Being in the base machine (máquina base) :
+1. Install Docker and docker-compose using the console.
+2. In the desktop, clone the repository:<br>
+`git clone https://github.com/13tm3nt3r/docker-lab.git`
+3. Now you have all the required folders. Follow the next steps to start all the containers:<br>
+`cd docker-lab/`<br>
+`cd local/`<br>
+`docker-compose up`<br>
+`// Command to stop the laboratory: docker-compose down`
+4. Exit the base machine
+5. Initialize the VPN in your local machine (PC usuario).
+6. Practice your pentester skills with each machine started remotely. Use the IPs below.
 
 ## Machines
 * **Kali** <br>
@@ -24,3 +29,6 @@ IP: 172.19.1.5:3000
 IP: 172.19.1.6
 * **Metasploitable2** <br>
 IP: 172.19.1.8
+
+## Structure
+![structure](https://user-images.githubusercontent.com/85936242/172235066-8dd475c5-44ca-46dd-bce7-23f1147adfcc.png)
